@@ -1,3 +1,8 @@
+;------------------------------------------------------------------------
+;FINAL PROJECT MICRO-CONRTROLLER LAB 31/21/2013
+;TOPIC: Electric Piano & built in music
+;by Anthony and Howard
+;-------------------------------------------------------------------------
     .SYMBOLS ON	
     ORG 0H
 SPEAKER REG P1.0
