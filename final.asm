@@ -1,19 +1,17 @@
-;------------------------------------------------------------------------
-;FINAL PROJECT MICRO-CONRTROLLER LAB 31/21/2013
-;TOPIC: Electric Piano & built in music
-;by Anthony and Howard
-;-------------------------------------------------------------------------
-    .SYMBOLS ON	
-    ORG 0H
+    .SYMBOLS ON
 SPEAKER REG P1.0
 TONE    REG R0
 MCOUNT  REG R1
 TEMPO   REG R2
-TIME    REG R3
+TIME    REG R3	
+    ORG 00H
+    JMP START
+    ORG 0FH
 
 START:
         MOV        P1,#0
-
+        MOV MCOUNT,#0        ;read the 1st row of table
+        MOV R4,#0        
 BEGIN:
         ;MOV MCOUNT,#0
         ;JMP BEGIN2
@@ -38,7 +36,7 @@ BEGIN:
         
 L0:
         MOV MCOUNT,#0        ;read the 1st row of table
-        MOV R4,#1        ;choose the first entry from table
+        MOV R4,#1        ;choose the one entry from table
         MOV P0,#00000010B ;led
         CALL BEGIN2        ;call the buzzer function
         JMP BEGIN
@@ -94,7 +92,7 @@ L7:
 
 MUSICBOX:
         MOV MCOUNT,#16
-        MOV R4, #36               
+        MOV R4, #29               
         CALL BEGIN2
         
         JMP BEGIN
@@ -128,18 +126,18 @@ sound1:
 SDELAY:
         MOV     B,TONE
 delay1:
-        MOV     R5,#3
+        MOV     R5,#2
         DJNZ    R5,$
         DJNZ    TONE,delay1
         MOV     TONE,B
         RET
-
+END
 SCALE:
     DB    126,50        ;do
     DB    113,95        ;re
-    DB    100,220        ;mi
-    DB    95,175        ;fa
-    DB    85,196        ;sol
+    DB    100,255        ;mi
+    DB    95,100        ;fa
+    DB    85,150        ;sol
     DB    75,255        ;la
     DB    67,255        ;si
     DB    63,255        ;Do
@@ -147,27 +145,29 @@ SCALE:
     DB    126,50        ;do
     DB    113,95        ;re
     DB    126,50        ;do
-    DB    95,175        ;fa
-    DB    100,220        ;mi
+    DB    95,140        ;fa
+    DB    100,255        ;mi
     DB    126,50        ;do
     DB    126,50        ;do
     DB    113,95        ;re
     DB    126,50        ;do
     DB    85,196        ;sol
-    DB    95,175        ;fa
+    DB    95,140        ;fa
     DB    126,50        ;do
     DB    126,50        ;do
     DB    63,255        ;Do
     DB    75,255        ;la
-    DB    95,175        ;fa
-    DB    100,220        ;mi
+    DB    75,255        ;la
+    DB    75,255        ;la
+    DB    95,140        ;fa
+    DB    100,255        ;mi
     DB    113,95        ;re
     DB    67,255        ;si
     DB    67,255        ;si
     DB    75,255        ;la
-    DB    95,175        ;fa
+    DB    75,255        ;la
+    DB    75,255        ;la
+    DB    95,140        ;fa
     DB    85,196        ;sol
-    DB    95,175        ;fa
+    DB    95,140        ;fa
 
-END
-    
